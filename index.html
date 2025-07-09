@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>EcoCompost - Abono Natural y Sostenible</title> <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Verde principal */
+            --secondary-color: #6C757D; /* Gris para texto secundario */
+            --background-light: #F8F9FA; /* Fondo muy claro */
+            --text-dark: #343A40; /* Texto oscuro */
+            --button-hover: #45a049; /* Verde oscuro al pasar el ratón */
+            --shadow-light: rgba(0, 0, 0, 0.1); /* Sombra ligera */
+            --shadow-medium: rgba(0, 0, 0, 0.15); /* Sombra un poco más fuerte */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--background-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px var(--shadow-light);
+            /* --- REGLAS CSS PARA EL LOGO AÑADIDAS/MODIFICADAS --- */
+            position: relative; /* Necesario para posicionar el logo absolutamente dentro */
+            display: flex; /* Para alinear el contenido dentro del header */
+            flex-direction: column; /* Apila el contenido por defecto */
+            align-items: center; /* Centra el contenido horizontalmente */
+            justify-content: center; /* Centra el contenido verticalmente */
+            padding-top: 60px; /* Ajusta el padding superior para dejar espacio al logo */
+            padding-bottom: 40px;
+        }
+
+        .logo {
+            position: absolute; /* Posicionamiento absoluto para el logo */
+            top: 15px; /* Distancia desde la parte superior */
+            left: 20px; /* Distancia desde la izquierda */
+            width: 80px; /* Tamaño del logo */
+            height: auto;
+            z-index: 1000; /* Asegura que esté por encima de otros elementos */
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Elimina espacio extra debajo de la imagen */
+        }
+
+        /* AJUSTES PARA EL CONTENIDO DEL ENCABEZADO PARA QUE NO CHOQUE CON EL LOGO */
+        header h1 {
+            margin-top: 0; /* Asegura que el margen superior no empuje el contenido */
+            font-size: 3em; /* Mantiene el tamaño original del h1 */
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            font-weight: 400;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, var(--background-light), #e9ecef);
+        }
+
+        .hero h2 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .hero img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 8px 16px var(--shadow-medium);
+            transition: transform 0.3s ease;
+        }
+
+        .hero img:hover {
+            transform: translateY(-5px);
+        }
+
+        .button-group {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Espacio entre botones */
+            flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+        }
+
+        .button-group button {
+            padding: 15px 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+            min-width: 180px; /* Asegura un ancho mínimo para los botones */
+        }
+
+        .button-group button:hover {
+            background: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--shadow-light);
+            display: none; /* Oculto por defecto */
+        }
+
+        .container.active {
+            display: block; /* Muestra cuando está activo */
+        }
+
+        .container h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: calc(100% - 22px); /* Ajuste para el padding */
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical; /* Permite redimensionar verticalmente */
+            min-height: 100px;
+        }
+
+        button[type="submit"] {
+            margin-top: 30px;
+            padding: 15px 25px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            background-color: var(--text-dark);
+            color: white;
+            font-size: 0.9em;
+            box-shadow: 0 -4px 8px var(--shadow-light);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            header p {
+                font-size: 1.1em;
+            }
+            .hero h2 {
+                font-size: 2em;
+            }
+            .button-group {
+                flex-direction: column; /* Apila los botones en pantallas pequeñas */
+                gap: 15px;
+            }
+            .container {
+                margin: 30px 20px;
+                padding: 30px;
+            }
+            /* --- Ajuste responsive para el logo --- */
+            .logo {
+                width: 60px; /* Reduce el tamaño del logo en pantallas más pequeñas */
+                top: 10px;
+                left: 15px;
+            }
+            header {
+                padding-top: 50px; /* Ajusta el padding superior */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 20px 10px;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            .hero {
+                padding: 40px 15px;
+            }
+            .hero h2 {
+                font-size: 1.8em;
+            }
+            .button-group button {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            .container {
+                padding: 20px;
+            }
+            .container h2 {
+                font-size: 1.8em;
+            }
+            input[type="text"],
+            input[type="email"],
+            textarea,
+            button[type="submit"] {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+            /* --- Ajuste responsive para el logo --- */
+            .logo {
+                width: 50px; /* Más pequeño para móviles */
+                top: 8px;
+                left: 10px;
+            }
+            header {
+                padding-top: 40px; /* Más pequeño para móviles */
+            }
+            header h1 {
+                font-size: 2em; /* Asegura que el título no sea demasiado grande */
+            }
+            header p {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            <img src="URL_DE_TU_IMAGEN_DE_LOGO.png" alt="Logo EcoCompost"> </a>
+        <h1>EcoCompost</h1> <p>En EcoCompost, buscamos ofrecer un fertilizante alternativo al fertilizante industrial, proveniente de lo que la gente descarte. A diferencia de los fertilizantes industriales, el nuestro no genera gases de efecto invernadero y está disponible para la planta en cuestión de horas, devolviendo vida a tu suelo de forma natural.</p>
+    </header>
+
+    <section class="hero">
+        <h2>Únete al ciclo natural: Transforma residuos en vida</h2>
+        <img src="https://cdn.pixabay.com/photo/2021/04/15/12/51/compost-6179509_1280.jpg" alt="Reciclaje de material orgánico y abono. Ilustra el proceso de compostaje.">
+        <div class="button-group">
+            <button onclick="showForm('donarForm')">
+                Quiero Donar Residuos
+            </button>
+            <button onclick="showForm('comprarForm')">
+                Quiero Comprar Compost
+            </button>
+        </div>
+    </section>
+
+    <div class="container" id="donarForm">
+        <h2>Formulario de Donación</h2>
+        <form action="https://formspree.io/f/f/marioj2522@gmail.com" method="POST">
+            <label for="donar_nombre">Nombre Completo:</label>
+            <input type="text" id="donar_nombre" name="nombre" required autocomplete="name">
+
+            <label for="donar_correo">Correo Electrónico:</label>
+            <input type="email" id="donar_correo" name="email" required autocomplete="email">
+
+            <label for="donar_telefono">Número de Teléfono:</label>
+            <input type="text" id="donar_telefono" name="telefono" required autocomplete="tel">
+
+            <label for="donar_direccion">Dirección para Recojo:</label>
+            <input type="text" id="donar_direccion" name="direccion" placeholder="Ej: Av. Primavera 123, Urb. Los Jardines" required autocomplete="street-address">
+
+            <label for="donar_tipo_residuo">Tipo de Residuos (Ej: restos de frutas, verduras, café):</label>
+            <textarea id="donar_tipo_residuo" name="tipo_residuo" rows="3" placeholder="Por favor, especifica el tipo y cantidad aproximada de residuos orgánicos." required></textarea>
+
+            <label for="donar_ubicacion_gps">Compartir mi Ubicación (Opcional):</label>
+            <input type="text" id="donar_ubicacion_gps" name="ubicacion_gps" readonly placeholder="Haga clic en el botón de abajo para obtener su ubicación.">
+            <button type="button" onclick="getLocation('donar_ubicacion_gps')" style="background-color: #007bff; margin-top: 10px;">Obtener Ubicación Actual</button>
+
+
+            <button type="submit" style="margin-top: 30px;">Enviar Solicitud de Donación</button>
+        </form>
+    </div>
+
+    <div class="container" id="comprarForm">
+        <h2>Formulario de Pedido de Compost</h2>
+        <form action="https://formspree.io/f/f/marioj2522@gmail.com" method="POST">
+            <label for="comprar_nombre">Nombre Completo:</label>
+            <input type="text" id="comprar_nombre" name="nombre" required autocomplete="name">
+
+            <label for="comprar_correo">Correo Electrónico:</label>
+            <input type="email" id="comprar_correo" name="email" required autocomplete="email">
+
+            <label for="comprar_telefono">Número de Teléfono:</label>
+            <input type="text" id="comprar_telefono" name="telefono" required autocomplete="tel">
+
+            <label for="comprar_direccion">Dirección de Entrega:</label>
+            <input type="text" id="comprar_direccion" name="direccion" placeholder="Ej: Calle Los Andes 456, Urb. El Golf" required autocomplete="street-address">
+
+            <label for="comprar_cantidad">Cantidad de Compost (Ej: 1 bolsa de 25kg):</label>
+            <input type="text" id="comprar_cantidad" name="cantidad" placeholder="Especifica la cantidad y presentación (si aplica)." required>
+
+            <label for="comprar_mensaje">Comentarios Adicionales (Opcional):</label>
+            <textarea id="comprar_mensaje" name="mensaje" rows="3" placeholder="¿Alguna instrucción especial para la entrega?"></textarea>
+
+            <button type="submit">Enviar Pedido de Compost</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 EcoCompost. Todos los derechos reservados. | ¡Abonando el futuro de Trujillo!</p> </footer>
+
+    <script>
+        function showForm(formId) {
+            // Oculta todos los formularios
+            document.querySelectorAll('.container').forEach(form => {
+                form.classList.remove('active');
+            });
+            // Muestra el formulario seleccionado
+            document.getElementById(formId).classList.add('active');
+            // Desplaza la vista al formulario
+            document.getElementById(formId).scrollIntoView({behavior: 'smooth'});
+        }
+
+        function getLocation(inputId) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        document.getElementById(inputId).value = `Lat: ${latitude}, Lon: ${longitude}`;
+                        alert('Ubicación obtenida exitosamente. Copiada al campo.');
+                    },
+                    (error) => {
+                        console.error("Error al obtener la ubicación:", error);
+                        alert("No se pudo obtener la ubicación. Por favor, asegúrese de que la ubicación esté habilitada en su navegador y vuelva a intentarlo.");
+                    }
+                );
+            } else {
+                alert("Geolocalización no es soportada por este navegador.");
+            }
+        }
+    </script>
+
+</body>
+</html>
